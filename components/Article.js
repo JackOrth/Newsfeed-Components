@@ -102,6 +102,7 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+  
 
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
@@ -114,3 +115,66 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+let newArt = {
+  title: 'Here is a New Article',
+  date: 'July 7th 2021',
+  firstParagraph: 'Here is the first paragraph of the article',
+  secondParagraph: 'Here is the second paragraph of the article',
+  thirdParagraph: 'Here is the third paragraph of the article',
+}
+data.push(newArt)
+
+let anotherArt = {
+  title: 'Here is a Another Article',
+  date: 'July 7th 2021',
+  firstParagraph: 'Here is the first paragraph of the second article',
+  secondParagraph: 'Here is the second paragraph of the second article',
+  thirdParagraph: 'Here is the third paragraph of the second article',
+}
+data.push(anotherArt)
+
+const articleMaker = (article) => {
+  const art = document.createElement('div')
+  art.classList.add('article')
+
+  const articleHead = document.createElement('h2')
+  articleHead.textContent = article.title
+
+  const articleDate = document.createElement('p')
+  articleDate.classList.add('date')
+  articleDate.textContent = article.date
+
+  const firstPar = document.createElement('p')
+  firstPar.textContent = article.firstParagraph
+
+  const secondPar = document.createElement('p')
+  secondPar.textContent = article.secondParagraph
+  
+  const thirdPar = document.createElement('p')
+  thirdPar.textContent = article.thirdParagraph
+
+  const plus = document.createElement('span')
+  plus.textContent = '+'
+  plus.classList.add('expandButton')
+
+  art.appendChild(articleHead)
+  articleHead.appendChild(articleDate)
+  articleDate.appendChild(firstPar)
+  firstPar.appendChild(secondPar)
+  secondPar.appendChild(thirdPar)
+  art.appendChild(plus)
+
+  plus.addEventListener('click', () =>{
+    art.classList.toggle('article-open')
+  })
+  return art
+}
+
+// console.log(articleMaker(data[0]))
+
+data.forEach(elem => {
+  const article = articleMaker(elem)
+  document.querySelector('.articles').appendChild(article)
+})
+
+
